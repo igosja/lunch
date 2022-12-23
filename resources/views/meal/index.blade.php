@@ -53,6 +53,9 @@ declare(strict_types=1);
                             Назва
                         </a>
                     </th>
+                    <th class="col-lg-1">
+                        Фаворит
+                    </th>
                     <th class="col-lg-1">&nbsp;</th>
                 </tr>
                 <tr class="filters" data-url="{{ route('meals.index') }}">
@@ -67,6 +70,7 @@ declare(strict_types=1);
                                value="{{ app('request')->query('name') }}">
                     </td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,6 +78,7 @@ declare(strict_types=1);
                     <tr data-key="{{ $meal->id }}">
                         <td>{{ $meal->id }}</td>
                         <td>{{ $meal->name }} {{ $meal->is_ordered ? '' : ' (Нове)' }}</td>
+                        <td>{{ $meal->is_favorite ? '+' : '' }}</td>
                         <td class="text-center">
                             <a href="{{ route('meals.show', ['meal' => $meal]) }}" title="Переглянути"
                                aria-label="Переглянути" data-pjax="0">

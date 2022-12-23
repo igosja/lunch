@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Category;
 use App\Models\Meal;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Exceptions\ChildNotFoundException;
 use PHPHtmlParser\Exceptions\CircularException;
@@ -104,7 +103,7 @@ class UpdateMenu extends Command
             $this->categories[$a->href] = $category->id;
         }
 
-        $this->info('Categories done');
+        $this->info('Categories done. Count: ' . count($this->categories));
     }
 
     /**
@@ -115,6 +114,8 @@ class UpdateMenu extends Command
     private function processMeals(): void
     {
         $this->info('Start meals');
+
+        $count = 0;
 
         Meal::query()->update(['is_active' => false]);
 
@@ -140,9 +141,11 @@ class UpdateMenu extends Command
 
                 $meal->is_active = true;
                 $meal->save();
+
+                $count++;
             }
         }
 
-        $this->info('Meals done');
+        $this->info('Meals done. Count:' . $count);
     }
 }
