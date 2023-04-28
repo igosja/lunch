@@ -5,9 +5,11 @@ namespace App\Console\Commands;
 use App\Models\Category;
 use App\Models\Meal;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Exceptions\ChildNotFoundException;
 use PHPHtmlParser\Exceptions\CircularException;
+use PHPHtmlParser\Exceptions\CurlException;
 use PHPHtmlParser\Exceptions\NotLoadedException;
 use PHPHtmlParser\Exceptions\StrictException;
 use Symfony\Component\Console\Command\Command as CommandAlias;
@@ -64,14 +66,24 @@ class UpdateMenu extends Command
      * @return void
      * @throws ChildNotFoundException
      * @throws CircularException
-     * @throws StrictException
+     * @throws StrictException|CurlException
      */
     private function loadFile(): void
     {
         $this->info('Start file loading');
 
+        $result = Http::withHeaders([
+            'cookie' => '_gid=GA1.3.714885193.1682660789; SID=j95bgcl7tp9cstsqvrpch88be3; 3a8fc645a90f01c9b2e4c2ff48e13aab=cb84d9751e969afbffb44003f8e3e09fcebd9231a:4:{i:0;s:5:"17514";i:1;s:19:"Бойко+Ігор";i:2;i:28800;i:3;a:0:{}}; _ga_6QSKKWZLH0=GS1.1.1682666929.3.1.1682668863.60.0.0; _ga_ERTB6DCPBF=GS1.1.1682666929.9.1.1682668863.60.0.0; _ga=GA1.3.781830796.1668579372; _gat_gtag_UA_47221429_3=1'
+        ])->get('https://orders.gudfood.com.ua/order');
+
+        $resultBody = $result->body();
+        if (strpos($resultBody, 'login')) {
+            $this->error('Error auth');
+            exit;
+        }
+
         $this->dom = new Dom;
-        $this->dom->loadFromFile(storage_path('1.html'));
+        $this->dom->load($resultBody);
 
         $this->info('File loading done');
     }
