@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->boolean('is_active')->default(false);
             $table->boolean('is_favorite')->default(false);
             $table->boolean('is_ordered')->default(false);
-            $table->boolean('is_unsuitable')->default(false);
             $table->string('name')->unique();
         });
 

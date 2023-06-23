@@ -9,7 +9,7 @@ declare(strict_types=1);
 @extends('layouts.layout')
 
 @section('content')
-    <h1 class="text-center">{{ $meal->name }}</h1>
+    <h1 class="text-center" id="header">{{ $meal->name }}</h1>
     <ul class="list-inline text-center">
         <li class="list-inline-item">
             <a class="btn btn-default" href="{{ route('meals.index') }}">Список</a>
@@ -19,31 +19,27 @@ declare(strict_types=1);
         </li>
     </ul>
     <div class="row">
-        <table class="table table-striped table-bordered detail-view">
+        <table class="table table-striped table-bordered detail-view" aria-describedby="header">
             <tbody>
             <tr>
-                <td>Id</td>
+                <th>Id</th>
                 <td>{{ $meal->id }}</td>
             </tr>
             <tr>
-                <td>Назва</td>
+                <th>Назва</th>
                 <td>{{ $meal->name }}</td>
             </tr>
             <tr>
-                <td>Активність</td>
+                <th>Активність</th>
                 <td>{{ $meal->is_active }}</td>
             </tr>
             <tr>
-                <td>Замовляв</td>
+                <th>Замовляв</th>
                 <td>{{ $meal->is_ordered }}</td>
             </tr>
             <tr>
-                <td>Сподобалось</td>
+                <th>Сподобалось</th>
                 <td>{{ $meal->is_favorite }}</td>
-            </tr>
-            <tr>
-                <td>Не підходить</td>
-                <td>{{ $meal->is_unsuitable }}</td>
             </tr>
             </tbody>
         </table>

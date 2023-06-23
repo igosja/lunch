@@ -30,7 +30,6 @@ class MealUpdateRequest extends FormRequest
             'is_active' => ['required', 'boolean'],
             'is_ordered' => ['required', 'boolean'],
             'is_favorite' => ['required', 'boolean'],
-            'is_unsuitable' => ['required', 'boolean'],
         ];
     }
 }

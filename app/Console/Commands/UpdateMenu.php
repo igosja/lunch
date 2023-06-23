@@ -136,7 +136,6 @@ class UpdateMenu extends Command
                     $meal->category_id = $this->categories[$categoryId];
                     $meal->is_ordered = false;
                     $meal->is_favorite = false;
-                    $meal->is_unsuitable = false;
                 }
 
                 $meal->is_active = true;

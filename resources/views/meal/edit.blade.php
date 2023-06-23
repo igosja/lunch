@@ -37,7 +37,12 @@ declare(strict_types=1);
                     <select id="category_id" class="form-control @error('category_id') is-invalid @enderror"
                             name="category_id">
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" @selected(old('category_id', $meal->category_id) === $category->id)>{{ $category->name }}</option>
+                            <option
+                                value="{{ $category->id }}"
+                                @selected(old('category_id', $meal->category_id) === $category->id)
+                            >
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('name')
@@ -79,19 +84,6 @@ declare(strict_types=1);
                                value="1">
                         <label class="form-check-label" for="is_favorite">Фаворит</label>
                         @error('is_favorite')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="form-check">
-                        <input type="hidden" name="is_unsuitable" value="0">
-                        <input type="checkbox" id="is_unsuitable"
-                               class="form-check-input @error('is_unsuitable') is-invalid @enderror" name="is_unsuitable"
-                               @checked(old('is_unsuitable', $meal->is_unsuitable))
-                               value="1">
-                        <label class="form-check-label" for="is_unsuitable">Не підходить</label>
-                        @error('is_unsuitable')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

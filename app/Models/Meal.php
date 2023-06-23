@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property bool $is_active
  * @property bool $is_favorite
  * @property bool $is_ordered
- * @property bool $is_unsuitable
  * @property string $name
  */
 class Meal extends Model

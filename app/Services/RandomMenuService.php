@@ -95,7 +95,6 @@ class RandomMenuService
                 'category_id' => $this->category->id,
                 'is_active' => true,
                 'is_ordered' => false,
-                'is_unsuitable' => false,
             ])
             ->inRandomOrder()
             ->limit(self::LIMIT)

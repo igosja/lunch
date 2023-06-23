@@ -93,7 +93,6 @@ class MealController extends AbstractController
         $meal->is_active = $data['is_active'];
         $meal->is_ordered = $data['is_ordered'];
         $meal->is_favorite = $data['is_favorite'];
-        $meal->is_unsuitable = $data['is_unsuitable'];
         if (!$meal->save()) {
             return back();
         }
