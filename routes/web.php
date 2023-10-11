@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UefaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::controller(UefaController::class)->group(function () {
+    Route::get('/uefa', 'index')->name('uefa');
+});
 
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'index')->name('home');
